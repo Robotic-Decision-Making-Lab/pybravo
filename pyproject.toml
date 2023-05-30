@@ -4,9 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = 'pybravo'
-dynamic = [
-  'version'
-]
+version = '0.0.1'
 description = 'An easy-to-use interface for the Reach Bravo 7 manipulator'
 readme = 'README.md'
 authors = [
@@ -57,7 +55,6 @@ exclude = '''
 
 [tool.ruff]
 line-length = 88
-update-check = true
 target-version = 'py311'
 fix = true
 
@@ -91,8 +88,7 @@ ignore = [
   "D413",
   "D100",
   "D104",
-  "E203",
-  "W503"
+  "E203"
 ]
 
 exclude = [

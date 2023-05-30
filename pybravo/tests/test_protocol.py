@@ -18,13 +18,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import sys
-
 import pytest  # noqa
 
-sys.path.append("..")
-
-from protocol import DeviceID, Packet, PacketID  # noqa
+from pybravo.protocol import DeviceID, Packet, PacketID  # noqa
 
 
 def test_packet_encoding() -> None:
