@@ -1,7 +1,6 @@
 [build-system]
-requires = ["setuptools>=59.2.0", "wheel"]
-
-build-backend = "setuptools.build_meta"
+requires = ["flit_core >=3.8.0,<4"]
+build-backend = "flit_core.buildapi"
 
 [project]
 name = 'pybravo'
@@ -59,7 +58,7 @@ exclude = '''
 [tool.ruff]
 line-length = 88
 update-check = true
-target-version = "py311"
+target-version = 'py311'
 fix = true
 
 select = [
@@ -91,7 +90,7 @@ ignore = [
   "D409",
   "D413",
   "D100",
-  "D104"
+  "D104",
   "E203",
   "W503"
 ]

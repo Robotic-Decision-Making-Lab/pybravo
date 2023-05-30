@@ -70,5 +70,6 @@
         "ms-python.flake8"
       ]
     }
-  }
+  },
+  "postStartCommand": "python3 -m pip install -e ."
 }

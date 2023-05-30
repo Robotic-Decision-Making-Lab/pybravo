@@ -19,15 +19,12 @@
 # SOFTWARE.
 
 import atexit
+import logging
 import socket
-import sys
 import threading
 from typing import Callable
-import logging
 
-sys.path.append("..")
-
-from protocol import Packet, PacketID  # noqa
+from pybravo.protocol import Packet, PacketID  # noqa
 
 
 class BravoDriver:

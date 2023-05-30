@@ -1,0 +1,15 @@
+# Required dependencies
+crc
+cobs
+
+# Testing dependencies
+pytest
+
+# Linting dependencies
+ruff
+black
+pre-commit
+mypy
+isort
+flake8
+pydocstyle

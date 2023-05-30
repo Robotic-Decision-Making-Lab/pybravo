@@ -17,17 +17,8 @@ RUN apt-get -q update \
 
 COPY . /
 
-# Install all required packages
-RUN python3 -m pip install -U -r requirements.txt
-
-# Install debugging/linting Python packages
-RUN python3 -m pip install -U \
-    pre-commit \
-    mypy \
-    isort \
-    flake8 \
-    pydocstyle \
-    black
+# Install all dev packages
+RUN python3 -m pip install -U -r requirements-dev.txt
 
 # Configure a new non-root user
 ARG USERNAME=dev
