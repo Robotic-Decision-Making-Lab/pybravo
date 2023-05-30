@@ -1,2 +1,55 @@
 # pybravo
-A Python interface for the Reach Bravo 7 manipulator.
+
+pybravo is a Python package that provides an interface for interacting
+with the Reach Bravo 7 manipulator.
+
+## Main features
+
+The main features of pybravo include:
+
+- Provides an easy-to-use interface for sending and receiving packets from the Bravo arm
+- Implements the Reach Serial protocol
+- Attach callbacks for asynchronous packet handling
+
+## Quick start
+
+Refer to the following code snippet for a simple example showing how to get started with
+pybravo. Additional examples may be found in the project examples.
+
+```python
+import struct
+import time
+
+from bravo import BravoDriver, PacketID, DeviceID, Packet
+
+
+def example_joint_positions_cb(packet: Packet) -> None:
+    """Read the joint positions from the Bravo 7.
+
+    Args:
+        packet: The joint position packet.
+    """
+    position: float = struct.unpack("<f", packet.data)[0]
+    print(f"The current joint position of joint {packet.device_id} is {position}")
+
+
+if __name__ == "__main__":
+    bravo = BravoDriver()
+
+    # Attempt to establish a connection with the Bravo
+    bravo.connect()
+
+    # Attach a callback to be executed when a packet with the POSITION ID is received
+    bravo.attach_callback(PacketID.POSITION, example_joint_positions_cb)
+
+    # Create a request for the current joint positions
+    request = Packet(DeviceID.ALL_JOINTS, PacketID.REQUEST, bytes([PacketID.POSITION]))
+
+    # Send the request
+    bravo.send(request)
+
+    # Wait a second for the Bravo to respond to the request
+    time.sleep(1.0)
+
+    bravo.disconnect()
+```

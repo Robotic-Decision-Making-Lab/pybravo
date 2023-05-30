@@ -1,0 +1,74 @@
+{
+  "dockerFile": ".docker/Dockerfile",
+  "context": ".",
+  "build": {
+    "args": {
+      "WORKSPACE": "${containerWorkspaceFolder}"
+    }
+  },
+  "remoteUser": "dev",
+  "runArgs": [
+    "--network=host",
+    "--cap-add=SYS_PTRACE",
+    "--security-opt=seccomp:unconfined",
+    "--security-opt=apparmor:unconfined",
+    "--volume=/dev:/dev",
+    "--privileged"
+  ],
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+    "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+    "PULSE_SERVER": "${localEnv:PULSE_SERVER}"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "editor.rulers": [90],
+        "python.linting.enabled": true,
+        "python.linting.flake8Enabled": true,
+        "python.linting.pylintEnabled": false,
+        "python.linting.pydocstyleEnabled": true,
+        "python.linting.mypyEnabled": true,
+        "python.formatting.provider": "black",
+        "autoDocstring.startOnNewLine": false,
+        "autoDocstring.docstringFormat": "google-notypes",
+        "isort.args": ["--profile", "black"],
+        "isort.check": true,
+        "[python]": {
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+          }
+        },
+        "[dockerfile]": {
+          "editor.quickSuggestions": {
+            "strings": true
+          },
+          "editor.defaultFormatter": "ms-azuretools.vscode-docker",
+          "editor.tabSize": 4
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[markdown]": {
+          "editor.rulers": [80],
+          "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+        }
+      },
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "njpwerner.autodocstring",
+        "DavidAnson.vscode-markdownlint",
+        "esbenp.prettier-vscode",
+        "ms-python.isort",
+        "ms-python.flake8"
+      ]
+    }
+  }
+}
