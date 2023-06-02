@@ -25,8 +25,8 @@ import struct
 from cobs import cobs
 from crc import Calculator, Configuration
 
-from .device_id import DeviceID
-from .packet_id import PacketID
+from pybravo.protocol.device_id import DeviceID
+from pybravo.protocol.packet_id import PacketID
 
 
 class Packet:
@@ -54,6 +54,17 @@ class Packet:
         self.device_id = device_id
         self.packet_id = packet_id
         self.data = data
+
+    def __str__(self) -> str:
+        """Print the packet as a string.
+
+        Returns:
+            A string description of the packet.
+        """
+        return (
+            f"Packet(Packet ID: {self.packet_id}, Device ID: {self.device_id},"
+            f" Data: {self.data!r})"
+        )
 
     def encode(self) -> bytes:
         """Encode the serial data using the COBS encoding algorithm.

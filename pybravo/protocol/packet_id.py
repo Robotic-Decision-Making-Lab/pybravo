@@ -18,6 +18,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""An enum wrapper that provides an abstraction for the ID of a Packet.
+
+The PacketID provides an abstraction for each of the packet IDs supported by the Reach
+serial protocol.
+
+Usage:
+    ```
+    # Create a packet ID from an integer
+    packet_id = PacketID(1)
+
+    # Get the hex value assigned to the packet ID
+    value = PacketID.POSITION.value
+    ```
+"""
+
 from enum import Enum
 
 

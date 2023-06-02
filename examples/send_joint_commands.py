@@ -18,33 +18,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""An enum wrapper that provides an abstraction for the ID of a device.
+"""Demonstrates how to set the joint positions of the Bravo.
 
-The DeviceID provides an abstraction for each of the device IDs supported by the Reach
-serial protocol.
+This example is inspired by the `joint_control_eth.py` example from the official
+Reach Robotics SDK (see the link below), and demonstrates how this package improves the
+usability of the official interface.
 
 Usage:
-    ```
-    # Create a device ID from an integer
-    device_id = DeviceID(1)
-
-    # Get the hex value assigned to the device ID
-    value = DeviceID.LINEAR_JAWS.value
-    ```
+    `python3 send_joint_commands.py`
 """
 
-from enum import Enum
+import struct
 
+from pybravo import BravoDriver, DeviceID, Packet, PacketID
 
-class DeviceID(Enum):
-    """The ID of a device on the Reach Bravo 7."""
+if __name__ == "__main__":
+    bravo = BravoDriver()
 
-    LINEAR_JAWS = 0x01
-    ROTATE_END_EFFECTOR = 0x02
-    BEND_FOREARM = 0x03
-    ROTATE_ELBOW = 0x04
-    BEND_ELBOW = 0x05
-    BEND_SHOULDER = 0x06
-    ROTATE_BASE = 0x07
-    ALL_JOINTS = 0xFF
-    FORCE_TORQUE_SENSOR = 0x0D
+    # Start the bravo connection
+    bravo.connect()
+
+    # Specify the desird positions
+    desired_positions = [10.0, 0.5, 1.5707, 1.5707, 1.5707, 2.8, 3.14159]
+
+    # Create the packets and send them to the Bravo
+    for i, position in enumerate(desired_positions):
+        packet = Packet(DeviceID(i), PacketID.POSITION, struct.pack(">f", position))
+        bravo.send(packet)

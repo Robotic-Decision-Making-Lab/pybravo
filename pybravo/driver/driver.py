@@ -24,49 +24,63 @@ import socket
 import threading
 from typing import Callable
 
-from pybravo.protocol import Packet, PacketID  # noqa
+from pybravo.protocol import Packet, PacketID
 
 
 class BravoDriver:
     """Low-level interface for sending and receiving serial data from the Bravo 7."""
 
-    def __init__(self, ip: str = "192.168.2.3", port: int = 6789) -> None:
-        """Create a new driver.
-
-        Args:
-            ip: The IP address of the Bravo 7. Defaults to "192.168.2.4".
-            port: The port to connect with the Bravo 7 over. Defaults to 6789.
-        """
-        self.address = (ip, port)
+    def __init__(self) -> None:
+        """Create a new driver."""
         self.callbacks: dict[PacketID, list[Callable]] = {}
+
+        # Leave this private because we don't want anyone to accidentally disable the
+        # polling thread
         self._running = False
+
+        # Set the address to none during configuration to enable changing the address
+        # when the connection happens
+        self.address: tuple[str, int] | None = None
 
         # Configure the logger
         logging.basicConfig()
         self._logger = logging.getLogger("BravoDriver")
         self._logger.setLevel(logging.INFO)
 
+        # Create a thread to poll for incoming packets
+        self._poll_t = threading.Thread(target=self._poll)
+        self._poll_t.setDaemon(True)
+
+        # Shutdown the connection on exit
+        atexit.register(self.disconnect)
+
+    def connect(self, ip: str = "192.168.2.3", port: int = 6789) -> None:
+        """Establish a connection between the Bravo 7 and the driver.
+
+        Args:
+            ip: The IP address of the Bravo 7. Defaults to "192.168.2.4".
+            port: The port to connect with the Bravo 7 over. Defaults to 6789.
+        """
+        self.address = (ip, port)
+
         # Configure a new socket with the Bravo
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.settimeout(1)
 
-        self.poll_t = threading.Thread(target=self._poll)
-        self.poll_t.setDaemon(True)
-
-        atexit.register(self.disconnect)
-
-    def connect(self) -> None:
-        """Connect the driver to the Bravo 7."""
         self._running = True
-        self.poll_t.start()
+        self._poll_t.start()
         self._logger.info(
             "Successfully established a connection to the Reach Bravo 7 manipulator."
         )
 
     def disconnect(self) -> None:
         """Disconnect the driver from the Bravo 7."""
+        # Reset the address for future connections
+        self.address = None
+
+        # Stop the thread
         self._running = False
-        self.poll_t.join()
+        self._poll_t.join()
         self._logger.info(
             "Successfully shut down the connection to the Reach Bravo 7 manipulator."
         )
@@ -77,6 +91,11 @@ class BravoDriver:
         Args:
             packet: The serial packet to send.
         """
+        if self.address is None:
+            raise RuntimeError(
+                "Packets can't be sent without first establishing a connection!"
+            )
+
         self.sock.sendto(packet.encode(), self.address)
 
     def attach_callback(self, packet_id: PacketID, callback: Callable) -> None:
@@ -110,7 +129,11 @@ class BravoDriver:
                     ...
                 else:
                     try:
-                        for func in self.callbacks[packet.packet_id]:
-                            func(packet)
-                    except Exception:
-                        ...
+                        for cb in self.callbacks[packet.packet_id]:
+                            cb(packet)
+                    except Exception as e:
+                        self._logger.warning(
+                            "An exception ocurred while trying to execute a callback for"
+                            f" the packet {packet}.",
+                            e,
+                        )
