@@ -23,14 +23,11 @@
 The PacketID provides an abstraction for each of the packet IDs supported by the Reach
 serial protocol.
 
-Usage:
-    ```
-    # Create a packet ID from an integer
-    packet_id = PacketID(1)
-
-    # Get the hex value assigned to the packet ID
-    value = PacketID.POSITION.value
-    ```
+Examples:
+    >>> PacketID.POSITION.value
+    0x03
+    >>> PacketID(1)
+    PacketID.MODE
 """
 
 from enum import Enum

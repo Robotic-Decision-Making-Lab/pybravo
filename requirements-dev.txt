@@ -1,9 +1,12 @@
-# Required dependencies
-crc
-cobs
+# Build dependencies
+crc>=4.2.0
+cobs>=1.2.0
 
-# Testing dependencies
+# Test dependencies
 pytest
+pytest-cov
+pyright
+tox
 
 # Linting dependencies
 ruff

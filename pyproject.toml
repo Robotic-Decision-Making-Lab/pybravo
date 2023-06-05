@@ -37,7 +37,7 @@ repository = 'https://github.com/evan-palmer/pybravo'
 test = ['pytest>=7.0.0']
 
 [tool.black]
-target-version = ['py310', 'py311']
+target-version = ['py310']
 required-version = '23.3.0'
 exclude = '''
 (
@@ -55,7 +55,7 @@ exclude = '''
 
 [tool.ruff]
 line-length = 88
-target-version = 'py311'
+target-version = 'py310'
 fix = true
 
 select = [
@@ -102,7 +102,7 @@ max-line-length = 88
 profile = "black"
 
 [tool.pyright]
-pythonVersion = "3.11"
+pythonVersion = "3.10"
 typeCheckingMode = "basic"
 exclude = ["pybravo/tests"]
 

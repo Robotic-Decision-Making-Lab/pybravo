@@ -32,7 +32,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     && rm -rf /var/lib/apt/lists/* \
-    && echo "source /usr/share/bash-completion/completions/git" >> /home/$USERNAME/.bashrc \
+    && echo "source /usr/share/bash-completion/completions/git" >> /home/$USERNAME/.bashrc
 
-    ARG WORKSPACE
+ARG WORKSPACE
 RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/$USERNAME/.bashrc

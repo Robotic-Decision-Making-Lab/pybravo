@@ -7,14 +7,15 @@ with the Reach Bravo 7 manipulator.
 
 The main features of pybravo include:
 
-- Provides an easy-to-use interface for sending and receiving packets from the Bravo arm
+- Provides an easy-to-use interface for sending and receiving packets from the
+  Bravo arm
 - Implements the Reach Serial protocol
 - Attach callbacks for asynchronous packet handling
 
 ## Quick start
 
-Refer to the following code snippet for a simple example showing how to get started with
-pybravo. Additional examples may be found in the project examples.
+Refer to the following code snippet for a simple example showing how to get
+started with pybravo. Additional examples may be found in the project examples.
 
 ```python
 import struct
@@ -30,7 +31,9 @@ def example_joint_positions_cb(packet: Packet) -> None:
         packet: The joint position packet.
     """
     position: float = struct.unpack("<f", packet.data)[0]
-    print(f"The current joint position of joint {packet.device_id} is {position}")
+    print(
+        f"The current joint position of joint {packet.device_id} is {position}"
+    )
 
 
 if __name__ == "__main__":
@@ -39,11 +42,14 @@ if __name__ == "__main__":
     # Attempt to establish a connection with the Bravo
     bravo.connect()
 
-    # Attach a callback to be executed when a packet with the POSITION ID is received
+    # Attach a callback to be executed when a packet with the POSITION ID is
+    # received
     bravo.attach_callback(PacketID.POSITION, example_joint_positions_cb)
 
     # Create a request for the current joint positions
-    request = Packet(DeviceID.ALL_JOINTS, PacketID.REQUEST, bytes([PacketID.POSITION]))
+    request = Packet(
+        DeviceID.ALL_JOINTS, PacketID.REQUEST, bytes([PacketID.POSITION])
+    )
 
     # Send the request
     bravo.send(request)

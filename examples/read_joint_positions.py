@@ -27,6 +27,7 @@ to design and register callbacks.
 
 import atexit
 import struct
+import sys
 import threading
 import time
 
@@ -65,7 +66,7 @@ class JointReader:
         """Request the current joint positions at a rate of 100 Hz."""
         while self._running:
             request = Packet(
-                DeviceID.ALL_JOINTS, PacketID.REQUEST, bytes([PacketID.POSITION])
+                DeviceID.ALL_JOINTS, PacketID.REQUEST, bytes([PacketID.POSITION.value])
             )
             self._bravo.send(request)
             time.sleep(0.01)
@@ -97,4 +98,4 @@ if __name__ == "__main__":
             time.sleep(0.1)
         except KeyboardInterrupt:
             reader.stop()
-            exit()
+            sys.exit()

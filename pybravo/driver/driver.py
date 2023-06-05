@@ -18,6 +18,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Provides an interface to the Reach Bravo 7 manipulator.
+
+The ``BravoDriver`` provides an interface for sending and receiving serial data from the
+Reach Bravo 7 manipulator.
+
+Examples:
+    >>> bravo = BravoDriver()
+    >>> bravo.connect()
+    >>> packet = Packet(
+            DeviceID.LINEAR_JAWS, PacketID.REQUEST, bytes([PacketID.POSITION.value])
+        )
+    >>> bravo.send(packet)
+"""
+
 import atexit
 import logging
 import socket
@@ -85,7 +99,7 @@ class BravoDriver:
             "Successfully shut down the connection to the Reach Bravo 7 manipulator."
         )
 
-    def send(self, packet: Packet):
+    def send(self, packet: Packet) -> None:
         """Send a packet to the Bravo 7.
 
         Args:
@@ -107,10 +121,14 @@ class BravoDriver:
             callback: The callback to execute when a packet with the given ID is
                 received.
         """
+        # We want to allow multiple callbacks to be attached to one packet ID
         if packet_id not in self.callbacks:
             self.callbacks[packet_id] = []
 
-        self.callbacks[packet_id].append(callback)
+        # Don't allow duplicate callbacks to be added to the list. This would result
+        # In the callback being run multiple times when a packet is received.
+        if callback not in self.callbacks[packet_id]:
+            self.callbacks[packet_id].append(callback)
 
     def _poll(self) -> None:
         """Poll the socket for new data and call the registered callbacks."""
@@ -133,7 +151,7 @@ class BravoDriver:
                             cb(packet)
                     except Exception as e:
                         self._logger.warning(
-                            "An exception ocurred while trying to execute a callback for"
-                            f" the packet {packet}.",
+                            "An exception occurred while trying to execute a callback"
+                            f" for the packet {packet}.",
                             e,
                         )

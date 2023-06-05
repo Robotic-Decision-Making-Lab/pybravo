@@ -23,14 +23,13 @@
 The DeviceID provides an abstraction for each of the device IDs supported by the Reach
 serial protocol.
 
-Usage:
-    ```
-    # Create a device ID from an integer
-    device_id = DeviceID(1)
+Examples:
+    The device ID byte values can be accessed from the enum.
 
-    # Get the hex value assigned to the device ID
-    value = DeviceID.LINEAR_JAWS.value
-    ```
+    >>> DeviceID.LINEAR_JAWS.value
+    0x01
+    >>> DeviceID(1)
+    DeviceID.LINEAR_JAWS
 """
 
 from enum import Enum

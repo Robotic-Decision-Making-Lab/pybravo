@@ -18,6 +18,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+r"""Provides a wrapper for packets defined using Reach serial protocol.
+
+A ``Packet`` provides an abstraction for serial data received from the Reach Bravo 7
+manipulator. A ``Packet`` can also be used to create commands to send to the Bravo.
+
+Examples:
+    >>> Packet(DeviceID.LINEAR_JAWS, PacketID.REQUEST, bytes([PacketID.POSITION.value]))
+    Packet(Packet ID: PacketID.REQUEST, Device ID: DeviceID.LINEAR_JAWS, Data: b'\x03')
+"""
+
 from __future__ import annotations
 
 import struct
