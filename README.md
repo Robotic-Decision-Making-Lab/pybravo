@@ -1,13 +1,20 @@
-# pybravo
+# pybravo :mechanical_arm:
 
-pybravo is a Python package that provides an interface for interacting
-with the Reach Bravo 7 manipulator.
+pybravo is a Python interface for interacting with the [Reach Bravo 7
+manipulator](https://reachrobotics.com/products/manipulators/reach-bravo/).
+
+## :warning: Disclaimer :warning:
+
+This is an independent project, and is not affiliated with or maintained by
+Reach Robotics. Please refer to the [Reach Robotics
+SDK](https://github.com/Reach-Robotics/reach_robotics_sdk/tree/master)
+for all official software.
 
 ## Main features
 
 The main features of pybravo include:
 
-- Provides an easy-to-use interface for sending and receiving packets from the
+- An easy-to-use interface for sending and receiving packets from the
   Bravo arm
 - Implements the Reach Serial protocol
 - Attach callbacks for asynchronous packet handling
