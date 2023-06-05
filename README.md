@@ -16,13 +16,14 @@ The main features of pybravo include:
 
 - An easy-to-use interface for sending and receiving packets from the
   Bravo arm
-- Implements the Reach Serial protocol
+- Implements the Reach serial protocol
 - Attach callbacks for asynchronous packet handling
 
 ## Quick start
 
 Refer to the following code snippet for a simple example showing how to get
-started with pybravo. Additional examples may be found in the project examples.
+started with pybravo. Additional examples may be found in the project
+[examples](https://github.com/evan-palmer/pybravo/tree/develop/examples).
 
 ```python
 import struct
@@ -55,7 +56,7 @@ if __name__ == "__main__":
 
     # Create a request for the current joint positions
     request = Packet(
-        DeviceID.ALL_JOINTS, PacketID.REQUEST, bytes([PacketID.POSITION])
+        DeviceID.ALL_JOINTS, PacketID.REQUEST, bytes([PacketID.POSITION.value])
     )
 
     # Send the request
@@ -66,3 +67,9 @@ if __name__ == "__main__":
 
     bravo.disconnect()
 ```
+
+## License
+
+Any proprietary documents or software owned by Reach Robotics and used within
+this project are subject to the Reach Robotics licensing. All other software
+is is released under the MIT license.
