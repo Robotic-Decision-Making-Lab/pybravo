@@ -1,0 +1,18 @@
+# Build dependencies
+crc>=4.2.0
+cobs>=1.2.0
+
+# Test dependencies
+pytest
+pytest-cov
+pyright
+tox
+
+# Linting dependencies
+ruff
+black
+pre-commit
+mypy
+isort
+flake8
+pydocstyle

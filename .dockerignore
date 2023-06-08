@@ -1,0 +1,5 @@
+# ignore everything
+*
+
+# except the following
+!requirements-dev.txt
