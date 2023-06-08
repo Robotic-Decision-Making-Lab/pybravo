@@ -44,3 +44,6 @@ if __name__ == "__main__":
     for i, position in enumerate(desired_positions):
         packet = Packet(DeviceID(i), PacketID.POSITION, struct.pack(">f", position))
         bravo.send(packet)
+
+    # Shutdown the connection
+    bravo.disconnect()
