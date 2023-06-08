@@ -32,6 +32,10 @@
         "editor.rulers": [90],
         "python.linting.enabled": true,
         "python.linting.flake8Enabled": true,
+        "python.linting.flake8Args": [
+          "--max-line-length=88",
+          "--ignore=D203,D213,D215,D406,D407,D408,D409,D413,D100,D104,E203"
+        ],
         "python.linting.pylintEnabled": false,
         "python.linting.pydocstyleEnabled": true,
         "python.linting.mypyEnabled": true,
