@@ -59,7 +59,7 @@ class Packet:
         Args:
             device_id: The device ID that the packet is targeting.
             packet_id: The ID of the packet.
-            data: The packet value.
+            data: The packet data.
         """
         self.device_id = device_id
         self.packet_id = packet_id
