@@ -4,8 +4,7 @@
 - [ ] I have sufficiently commented my code
 - [ ] The implementation follows the project style conventions
 - [ ] All project unit tests are passing
-- [ ] If relevant, documentation has been provided or updated to discuss the
-  changes made
+- [ ] If relevant, documentation has been provided or updated to discuss the changes made
 - [ ] System integration tests were performed successfully
 
 ## Changes Made
