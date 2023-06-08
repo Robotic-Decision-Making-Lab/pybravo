@@ -9,6 +9,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  FORCE_COLOR: "1"
+  TOX_TESTENV_PASSENV: FORCE_COLOR
+
 jobs:
   tests:
     name: Test implementation
@@ -16,19 +20,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10"]
+        python-version: "3.10"
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
+      - run: |
           python -m pip install --upgrade pip
           python -m pip install tox tox-gh-actions
-      - name: Test implementation
-        run: python -m tox
+      - run: tox
 
   package:
     name: Test package build
