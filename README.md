@@ -19,6 +19,23 @@ The main features of pybravo include:
 - Implements the Reach serial protocol
 - Attach callbacks for asynchronous packet handling
 
+## Installation
+
+To build pybravo from source, please refer to the following steps:
+
+1. Clone the project [repository](https://github.com/evan-palmer/pybravo)
+2. Navigate to the `pybravo` base directory
+
+```bash
+cd path/to/pybravo
+```
+
+3. Install the package
+
+```bash
+python3 -m pip install .
+```
+
 ## Quick start
 
 Refer to the following code snippet for a simple example showing how to get
