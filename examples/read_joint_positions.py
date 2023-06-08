@@ -54,12 +54,21 @@ class JointReader:
 
     def start(self) -> None:
         """Start the joint position reader."""
+        # Start a connection to the Bravo
+        self._bravo.connect()
+
+        # Start the polling thread
         self._running = True
         self.poll_t.start()
 
     def stop(self) -> None:
         """Stop the joint position reader."""
+        # Stop the poll thread loop
         self._running = False
+
+        # Disconnect the bravo driver
+        self._bravo.disconnect()
+
         self.poll_t.join()
 
     def poll_joint_angles(self) -> None:
@@ -77,6 +86,8 @@ class JointReader:
         Args:
             packet: A packet with a joint position measurement.
         """
+        # The unpacking order will need to change according to the system on which the
+        # data is received (i.e., Windows vs Linux)
         position: float = struct.unpack("<f", packet.data)[0]
 
         # The jaws are a linear joint; convert from mm to m

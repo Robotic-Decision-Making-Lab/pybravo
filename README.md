@@ -1,7 +1,8 @@
 # pybravo :mechanical_arm:
 
 pybravo is a Python interface for interacting with the [Reach Bravo
-7](https://reachrobotics.com/products/manipulators/reach-bravo/) manipulator.
+7](https://reachrobotics.com/products/manipulators/reach-bravo/) manipulator
+over an Ethernet connection.
 
 ## :warning: Disclaimer :warning:
 

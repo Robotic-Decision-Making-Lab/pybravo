@@ -24,8 +24,6 @@ The DeviceID provides an abstraction for each of the device IDs supported by the
 serial protocol.
 
 Examples:
-    The device ID byte values can be accessed from the enum.
-
     >>> DeviceID.LINEAR_JAWS.value
     0x01
     >>> DeviceID(1)

@@ -20,13 +20,12 @@
 
 """Demonstrates how to set the joint positions of the Bravo.
 
-This example is inspired by the `joint_control_eth.py` example from the official
-Reach Robotics SDK (see the link below), and demonstrates how this package improves the
+This example is inspired by the `joint_control_eth.py`_ example from the official
+Reach Robotics SDK, and demonstrates how this package improves the
 usability of the official interface.
 
-Usage:
-    `python3 send_joint_commands.py`
-"""
+.. _joint_control_eth.py: https://github.com/Reach-Robotics/reach_robotics_sdk/blob/master/bplprotocol/examples/joint_control_eth.py
+"""  # noqa
 
 import struct
 

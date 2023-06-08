@@ -143,8 +143,12 @@ class BravoDriver:
 
                 try:
                     packet = Packet.decode(read_data)
-                except Exception:
-                    ...
+                except Exception as e:
+                    self._logger.debug(
+                        "An error occurred while attempting to decode the"
+                        f" data: {read_data!r}",
+                        e,
+                    )
                 else:
                     try:
                         for cb in self.callbacks[packet.packet_id]:
