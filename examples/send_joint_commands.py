@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     # Create the packets and send them to the Bravo
     for i, position in enumerate(desired_positions):
-        packet = Packet(DeviceID(i), PacketID.POSITION, struct.pack(">f", position))
+        packet = Packet(DeviceID(i), PacketID.POSITION, struct.pack("<f", position))
         bravo.send(packet)
 
     # Shutdown the connection
