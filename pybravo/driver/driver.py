@@ -31,6 +31,7 @@ Examples:
         )
     >>> bravo.send(packet)
 """
+from __future__ import annotations
 
 import atexit
 import logging
