@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: "3.x"
       - name: Build and upload dist
-      - run: |
+        run: |
           python -m pip install build twine check-wheel-contents
           python -m build --sdist --wheel .
       - name: Publish pybravo to PyPI
