@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - 4-feature-publish-the-package-to-pypi
     tags:
       - v*.*.*
   pull_request:

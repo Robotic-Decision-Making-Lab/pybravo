@@ -2,8 +2,6 @@ name: Deployment
 
 on:
   push:
-    branches:
-      - 4-feature-publish-the-package-to-pypi
     tags:
       - v*.*.*
   workflow_dispatch:
