@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = 'pybravo'
-version = '0.0.1'
+version = '0.1.1'
 description = 'An easy-to-use interface for the Reach Bravo 7 manipulator'
 readme = 'README.md'
 authors = [
