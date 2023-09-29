@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - 4-feature-publish-the-package-to-pypi
     tags:
       - v*.*.*
   pull_request:
@@ -22,6 +23,8 @@ jobs:
       matrix:
         python-version:
           - "3.10"
+          - "3.9"
+          - "3.8"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -35,11 +38,18 @@ jobs:
   package:
     name: Test package build
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.10"
+          - "3.9"
+          - "3.8"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
         with:
-          python-version: "3.10"
+          python-version: ${{ matrix.python-version }}
       - run: python -m pip install build twine check-wheel-contents
       - run: python -m build --sdist --wheel .
       - run: ls -l dist
