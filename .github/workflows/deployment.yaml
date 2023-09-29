@@ -1,0 +1,28 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - 4-feature-publish-the-package-to-pypi
+    tags:
+      - v*.*.*
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Build & publish package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"
+      - run: python -m pip install build twine check-wheel-contents
+      - run: python -m build --sdist --wheel .
+      - run: ls -l dist
+      - run: check-wheel-contents dist/*.whl
+      - run: python -m twine check dist/*
+      - name: Publish pybravo to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
