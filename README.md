@@ -22,6 +22,13 @@ The main features of pybravo include:
 
 ## Installation
 
+pybravo can be installed from [PyPI](https://pypi.org/project/pybravo/) by
+running:
+
+```bash
+python3 -m pip install pybravo
+```
+
 To build pybravo from source, please refer to the following steps:
 
 1. Clone the project [repository](https://github.com/Robotic-Decision-Making-Lab/pybravo.git)
