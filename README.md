@@ -22,8 +22,8 @@ The main features of pybravo include:
 
 ## Installation
 
-pybravo can be install from [PyPi](https://pypi.org/project/pybravo/) or from
-source. To install pybravo from PyPi, run the following command:
+pybravo can be installed from [PyPI](https://pypi.org/project/pybravo/) by
+running:
 
 ```bash
 python3 -m pip install pybravo
