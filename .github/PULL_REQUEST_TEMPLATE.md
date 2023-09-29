@@ -9,8 +9,7 @@
 
 ## Changes Made
 
-Please provide a description of all changes made in this PR and why the changes
-are needed.
+Please provide a summary of all changes made in this PR.
 
 ## Associated Issues
 
@@ -18,11 +17,6 @@ Please provide a list of all open issues that this PR will close or contribute
 toward closing.
 
 - Fixes # (issue)
-
-## Files Changed
-
-Please provide a list of all files changed and a summary of the changes made to
-the respective files.
 
 ## Testing
 
