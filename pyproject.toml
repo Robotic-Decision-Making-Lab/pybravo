@@ -31,7 +31,7 @@ classifiers = [
 ]
 
 [project.urls]
-repository = 'https://github.com/evan-palmer/pybravo'
+repository = 'https://github.com/Robotic-Decision-Making-Lab/pybravo'
 
 [project.optional-dependencies]
 test = ['pytest>=7.0.0']

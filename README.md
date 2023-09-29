@@ -24,7 +24,7 @@ The main features of pybravo include:
 
 To build pybravo from source, please refer to the following steps:
 
-1. Clone the project [repository](https://github.com/evan-palmer/pybravo)
+1. Clone the project [repository](https://github.com/Robotic-Decision-Making-Lab/pybravo.git)
 2. Navigate to the `pybravo` base directory
 
 ```bash
@@ -41,7 +41,7 @@ python3 -m pip install .
 
 Refer to the following code snippet for a simple example showing how to get
 started with pybravo. Additional examples may be found in the project
-[examples](https://github.com/evan-palmer/pybravo/tree/develop/examples).
+[examples](https://github.com/Robotic-Decision-Making-Lab/pybravo/tree/main/examples).
 
 ```python
 import struct

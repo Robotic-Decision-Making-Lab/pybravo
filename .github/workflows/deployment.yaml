@@ -1,0 +1,31 @@
+name: Deployment
+
+on:
+  push:
+    tags:
+      - v*.*.*
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Build & publish package
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/pybravo
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"
+      - name: Build and upload dist
+        run: |
+          python -m pip install build twine check-wheel-contents
+          python -m build --sdist --wheel .
+      - name: Publish pybravo to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1.8
+        with:
+          verbose: true
+          password: ${{ secrets.PYPI_API_TOKEN }}
