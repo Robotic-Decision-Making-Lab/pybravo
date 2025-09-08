@@ -25,7 +25,7 @@ jobs:
           python -m pip install build twine check-wheel-contents
           python -m build --sdist --wheel .
       - name: Publish pybravo to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1.12
+        uses: pypa/gh-action-pypi-publish@release/v1.13
         with:
           verbose: true
           password: ${{ secrets.PYPI_API_TOKEN }}
